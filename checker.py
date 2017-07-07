@@ -1,3 +1,4 @@
+import datetime
 from base64 import b64decode
 
 import requests
@@ -53,10 +54,12 @@ for row in rows[1:]:
 
     grades.append('{}: {}'.format(modname, grade))
 
+dt = datetime.datetime.now()
+
 if not all_blocked:
     # send push
-    print('sending push')
+    print('{} sending push'.format(dt))
     pb = Pushbullet(PUSHBULLET_ACCESS_TOKEN)
     pb.push_note('Grades', '\n'.join(grades))
 else:
-    print('all grades still blocked, not sending notification')
+    print('{} all grades still blocked, not sending notification'.format(dt))
